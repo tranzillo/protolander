@@ -1,0 +1,6 @@
+.ds_store
+node_modules
+notes.txt
+package-lock.json
+src/css/main.css.map
+lander.zip
