@@ -15,29 +15,38 @@
 <body>
 
 <header>
-  <nav>
-    <ul>
-      <li class="logo">
-        <a href="https://tranzillo.com">
-          <img src="img/logo.svg">
-        </a>
-      </li>
-      <li>
-        <a href="lander.zip">Download</a>
-      </li>
-      <li>
-        <a href="https://tranzillo.com">About</a>
-      </li>
-      <li>
-        <a href="https://www.upwork.com/freelancers/~01e06ecd3200e059f7">Support</a>
-      </li>
-      <li class="menu">
-        <button>
-          <img src="img/menu.svg">
-        </button>
-      </li>
-    </ul>
-  </nav>
+    <nav>
+      <ul>
+        <li class="logo">
+          <a href="https://tranzillo.com">
+            <img src="img/logo.svg">
+          </a>
+        </li>
+        <aside>
+          <ul>
+            <li class="menu">
+              <button>
+                <img src="img/close.svg">
+              </button>
+            </li>
+            <li>
+              <a href="lander.zip">Download</a>
+            </li>
+            <li>
+              <a href="https://tranzillo.com">About</a>
+            </li>
+            <li>
+              <a href="https://www.upwork.com/freelancers/~01e06ecd3200e059f7">Support</a>
+            </li>
+          </ul>
+        </aside>
+        <li class="menu">
+          <button>
+            <img src="img/menu.svg">
+          </button>
+        </li>
+      </ul>
+    </nav>
   <section>
     <ul>
       <li>
@@ -235,36 +244,13 @@
 
 <script>
 $(".menu button").click(function () {
-    $('body').prepend(navMenu);
+    $("aside, aside .menu").addClass('active');
     $('body').addClass('lightbox');
     $("aside .menu button").click(function () {
-      $("aside").remove();
+      $("aside, aside .menu").removeClass('active');
       $('body').removeClass('lightbox');
     });
 });
-
-function navMenu() {
-return `<aside>
-  <nav>
-    <ul>
-      <li class="menu">
-        <button>
-          <img src="img/close.svg">
-        </button>
-      </li>
-      <li>
-        <a href="lander.zip">Download</a>
-      </li>
-      <li>
-        <a href="https://tranzillo.com">About</a>
-      </li>
-      <li>
-        <a href="https://www.upwork.com/freelancers/~01e06ecd3200e059f7">Support</a>
-      </li>
-    </ul>
-  </nav>
-</aside>`;
-}
 </script>
 </body>
 </html>

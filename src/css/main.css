@@ -55,7 +55,7 @@ html, body {
   letter-spacing: 0.04em;
 }
 
-body .lightbox:after {
+body.lightbox:after {
   content: "";
   position: absolute;
   top: 0;
@@ -143,8 +143,10 @@ header nav ul {
 header nav ul li {
   margin: 2em;
 }
+header nav ul aside .menu {
+  display: none;
+}
 header nav .menu, header nav .logo {
-  height: 2em;
   width: auto;
 }
 header nav .menu img, header nav .logo img {
@@ -363,44 +365,8 @@ button.third {
   color: #fdfbfa;
 }
 
-aside {
-  position: fixed;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: #3e445a;
-  color: #f6f4f4;
-  z-index: 2;
-  display: none;
-}
-aside nav {
-  margin-top: 3em;
-}
-aside nav ul {
-  flex-direction: column;
-  align-items: flex-start;
-}
-aside nav ul li {
-  padding: 0.5em 2em;
-  font-size: 1.5em;
-  display: initial;
-}
-aside nav ul .menu {
-  margin-bottom: 1em;
-}
-aside nav ul .menu button {
-  background-color: transparent;
-  box-shadow: none;
-  padding: 0;
-  color: #f6f4f4;
-}
-aside nav ul .menu button img {
-  height: 2em;
-  width: auto;
-}
-
-.hidden {
-  display: none;
+.active {
+  display: initial !important;
 }
 
 @media only screen and (max-width: calc(1 * 1200px)) {
@@ -442,9 +408,40 @@ aside nav ul .menu button img {
     padding: 1em;
   }
 
-  header nav ul li {
+  header nav aside {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 2.8em;
+    background-color: #3e445a;
+    color: #f6f4f4;
+    z-index: 2;
     display: none;
-    pointer-events: none;
+  }
+  header nav aside ul {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  header nav aside ul li {
+    margin: 0;
+    padding: 0.5em 0;
+    font-size: 1.5em;
+    display: initial;
+  }
+  header nav aside ul .menu {
+    margin: 0 0 2em;
+    display: none;
+  }
+  header nav aside ul .menu button {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    color: #f6f4f4;
+  }
+  header nav aside ul .menu button img {
+    height: 2em;
+    width: auto;
   }
   header nav .logo, header nav .menu {
     display: initial;
@@ -488,7 +485,7 @@ aside nav ul .menu button img {
     width: 50%;
   }
 
-  aside, body.lightbox:after {
+  body.lightbox:after {
     display: initial;
   }
 }

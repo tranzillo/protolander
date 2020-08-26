@@ -41,20 +41,18 @@ html, body {
   color: $black;
   letter-spacing: 0.04em;
 }
-body {
-  .lightbox:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: $black;
-    opacity: 0.8;
-    z-index: 1;
-    display:none;
-    pointer-events: none;
-  }
+body.lightbox:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $black;
+  opacity: 0.8;
+  z-index: 1;
+  display:none;
+  pointer-events: none;
 }
 ul, ol, dl {
   list-style-type: none;
@@ -130,9 +128,13 @@ header {
       li {
         margin: 2em;
       }
+      aside {
+        .menu {
+          display: none;
+        }
+      }
     }
     .menu, .logo {
-      height: 2em;
       width: auto;
       img {
         height: 100%;
@@ -357,43 +359,8 @@ button.third {
   background-color: $blue;
   color: $white;
 }
-aside {
-  position: fixed;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: $black;
-  color: $offwhite;
-  z-index: 2;
-  display: none;
-  nav {
-    margin-top: 3em;
-    ul {
-      flex-direction: column;
-      align-items: flex-start;
-      li {
-        padding: 0.5em 2em;
-        font-size: 1.5em;
-        display: initial;
-      }
-      .menu {
-        margin-bottom: 1em;
-        button {
-          background-color: transparent;
-          box-shadow: none;
-          padding: 0;
-          color: $offwhite;
-          img {
-            height: 2em;
-            width: auto;
-          }
-        }
-      }
-    }
-  }
-}
-.hidden {
-  display:none;
+.active {
+  display: initial !important;
 }
 @media only screen and (max-width: calc(#{$scale} * 1200px)) {
   main {
@@ -456,11 +423,40 @@ aside {
   }
   header {
     nav {
-      ul {
-        li {
-          display:none;
-          pointer-events: none;
-        }
+      aside {
+        position: fixed;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding: 2.8em;
+        background-color: $black;
+        color: $offwhite;
+        z-index: 2;
+        display: none;
+          ul {
+            flex-direction: column;
+            align-items: flex-start;
+            li {
+              margin:0;
+              padding: 0.5em 0;
+              font-size: 1.5em;
+              display: initial;
+            }
+            .menu {
+              margin:0 0 2em;
+              display: none;
+              button {
+                background-color: transparent;
+                box-shadow: none;
+                padding: 0;
+                color: $offwhite;
+                img {
+                  height: 2em;
+                  width: auto;
+                }
+              }
+            }
+          }
       }
       .logo, .menu {
         display: initial;
@@ -521,7 +517,7 @@ aside {
       }
     }
   }
-  aside, body.lightbox:after  {
+  body.lightbox:after  {
     display: initial;
   }
 }
