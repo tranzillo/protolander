@@ -160,6 +160,7 @@ header nav .logo {
   z-index: 2;
 }
 header nav .menu {
+  padding: 0.5em;
   margin-left: auto;
   visibility: hidden;
   pointer-events: none;
@@ -369,7 +370,7 @@ button.third {
   display: initial !important;
 }
 
-@media only screen and (max-width: calc(1 * 1200px)) {
+@media only screen and (max-width: calc(1 * 1280px)) {
   main section ul li {
     width: 50%;
   }
@@ -431,6 +432,7 @@ button.third {
   }
   header nav aside ul .menu {
     margin: 0 0 2em;
+    padding-left: 0;
     display: none;
   }
   header nav aside ul .menu button {

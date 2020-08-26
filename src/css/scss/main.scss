@@ -148,6 +148,7 @@ header {
       z-index: 2;
     }
     .menu {
+      padding: 0.5em;
       margin-left: auto;
       visibility: hidden;
       pointer-events: none;
@@ -362,7 +363,7 @@ button.third {
 .active {
   display: initial !important;
 }
-@media only screen and (max-width: calc(#{$scale} * 1200px)) {
+@media only screen and (max-width: calc(#{$scale} * 1280px)) {
   main {
     section {
       ul {
@@ -444,6 +445,7 @@ button.third {
             }
             .menu {
               margin:0 0 2em;
+              padding-left: 0;
               display: none;
               button {
                 background-color: transparent;
