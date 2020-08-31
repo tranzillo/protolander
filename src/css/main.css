@@ -28,7 +28,7 @@
   src: url(../fonts/NotoSans-BoldItalic.ttf);
 }
 ::selection {
-  background-color: rgba(249, 86, 88, 0.33);
+  background-color: rgba(249, 86, 186, 0.33);
 }
 
 * {
@@ -50,7 +50,7 @@ html, body {
   margin: 0;
   font-family: "Noto";
   font-weight: normal;
-  font-size: calc(10px + 1vw);
+  font-size: calc(12px + 0.9vw);
   color: #3e445a;
   letter-spacing: 0.04em;
 }
@@ -87,6 +87,7 @@ p {
 a {
   color: #6e64ff;
   text-decoration: underline;
+  transition: opacity 0.2s;
 }
 
 a:hover {
@@ -113,8 +114,10 @@ section h1 {
   margin-top: 0;
 }
 section h2 {
+  position: relative;
   font-size: 2.2em;
   line-height: 1.25em;
+  text-decoration: underline;
 }
 
 header {
@@ -184,7 +187,7 @@ header:before {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: #f95658;
+  background-color: #f956ba;
   background-image: url("../img/pattern.svg");
   background-size: cover;
   background-position: center center;
@@ -197,6 +200,20 @@ main section {
 }
 main section p a {
   opacity: 0.8;
+}
+main section p i {
+  background-color: #66728a;
+  padding: 0.1em 0.25em 0.15em;
+  border-radius: 0.15em;
+  margin: 0;
+  font-size: 88%;
+  font-style: normal;
+  transition: background-color 0.2s;
+}
+main section p i a {
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.94;
 }
 main section ul {
   flex-wrap: nowrap;
@@ -335,13 +352,14 @@ button {
   background-color: #f6f4f4;
   padding: 1em 2em;
   border-radius: 2em;
-  font-size: calc(10px + 1vw);
+  font-size: calc(12px + 1vw);
   font-weight: normal;
   cursor: pointer;
   box-shadow: 0 0.2em 0.2em 0 rgba(0, 0, 0, 0), 0 0.2em 0.2em 0 rgba(0, 0, 0, 0.125);
   opacity: 0.94;
   color: #3e445a;
   text-decoration: none;
+  transition: opacity 0.2s;
 }
 
 button:hover {
@@ -364,6 +382,54 @@ button.second {
 button.third {
   background-color: #6e64ff;
   color: #fdfbfa;
+}
+
+.blue {
+  background-color: rgba(110, 100, 255, 0.2);
+}
+
+.blue:hover {
+  background-color: rgba(110, 100, 255, 0.3);
+}
+
+.green {
+  background-color: rgba(44, 200, 161, 0.2);
+}
+
+.green:hover {
+  background-color: rgba(44, 200, 161, 0.3);
+}
+
+.yellow {
+  background-color: rgba(236, 191, 43, 0.2);
+}
+
+.yellow:hover {
+  background-color: rgba(236, 191, 43, 0.3);
+}
+
+.red {
+  background-color: rgba(249, 86, 186, 0.2);
+}
+
+.red:hover {
+  background-color: rgba(249, 86, 186, 0.3);
+}
+
+#first h2 {
+  text-decoration-color: rgba(110, 100, 255, 0.4);
+}
+
+#second h2 {
+  text-decoration-color: rgba(44, 200, 161, 0.4);
+}
+
+#third h2 {
+  text-decoration-color: rgba(249, 86, 186, 0.4);
+}
+
+#fourth h2 {
+  text-decoration-color: rgba(236, 191, 43, 0.4);
 }
 
 .active {

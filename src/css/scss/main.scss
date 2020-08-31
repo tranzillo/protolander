@@ -4,12 +4,13 @@ $grey: rgb(102, 114, 138);
 $black: rgb(62, 68, 90);
 
 $blue: rgb(110, 100, 255);
-$green: rgb(50, 220, 80);
-$red: rgb(249, 86, 88);
+$green: rgb(44, 200, 161);
+$red: rgb(249, 86, 186);
+$yellow: rgb(236, 191, 43);
 
 @import 'fonts.scss';
 
-$base: 10px;
+$base: 12px;
 $small: 8px;
 $med: 2em;
 $large: 3em;
@@ -37,7 +38,7 @@ html, body {
   margin: 0;
   font-family: "Noto";
   font-weight: normal;
-  font-size: calc(#{$base} + 1vw);
+  font-size: calc(#{$base} + 0.9vw);
   color: $black;
   letter-spacing: 0.04em;
 }
@@ -70,6 +71,7 @@ p {
 a {
   color: $blue;
   text-decoration: underline;
+  transition: opacity 0.2s;
 }
 a:hover {
   opacity: 1;
@@ -97,8 +99,10 @@ section {
     margin-top: 0;
   }
   h2 {
+    position: relative;
     font-size: 2.2em;
     line-height: 1.25em;
+    text-decoration:underline;
   }
 }
 header {
@@ -183,8 +187,24 @@ main {
   section {
     position: relative;
     background-color: $white;
-    p a {
-      opacity: 0.8;
+    p {
+      a {
+        opacity: 0.8;
+      }
+      i {
+        background-color: $grey;
+        padding: 0.1em 0.25em 0.15em;
+        border-radius:0.15em;
+        margin: 0;
+        font-size: 88%;
+        font-style: normal;
+        transition: background-color 0.2s;
+        a {
+          text-decoration: none;
+          color: inherit;
+          opacity: 0.94;
+        }
+      }
     }
     ul {
       flex-wrap: nowrap;
@@ -342,6 +362,7 @@ button {
   opacity: 0.94;
   color: $black;
   text-decoration: none;
+  transition: opacity 0.2s;
 }
 button:hover {
   opacity: 1;
@@ -360,6 +381,44 @@ button.third {
   background-color: $blue;
   color: $white;
 }
+
+.blue {
+  background-color: rgba($blue, 0.2);
+}
+.blue:hover {
+  background-color: rgba($blue, 0.3);
+}
+.green {
+  background-color: rgba($green, 0.2);
+}
+.green:hover {
+  background-color: rgba($green, 0.3);
+}
+.yellow {
+  background-color: rgba($yellow, 0.2);
+}
+.yellow:hover {
+  background-color: rgba($yellow, 0.3);
+}
+.red {
+  background-color: rgba($red, 0.2);
+}
+.red:hover {
+  background-color: rgba($red, 0.3);
+}
+#first h2 {
+  text-decoration-color: rgba($blue, 0.4);
+}
+#second h2 {
+  text-decoration-color: rgba($green, 0.4);
+}
+#third h2 {
+  text-decoration-color: rgba($red, 0.4);
+}
+#fourth h2 {
+  text-decoration-color: rgba($yellow, 0.4);
+}
+
 .active {
   display: initial !important;
 }
