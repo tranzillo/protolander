@@ -114,10 +114,13 @@ section h1 {
   margin-top: 0;
 }
 section h2 {
+  display: inline;
   position: relative;
   font-size: 2.2em;
   line-height: 1.25em;
   text-decoration: underline;
+  transition: text-decoration-color 0.2s;
+  cursor: pointer;
 }
 
 header {
@@ -128,14 +131,15 @@ header {
   color: #fdfbfa;
   padding: 1em 0 3em;
 }
+header section {
+  padding-top: 1em;
+}
 header section ul {
   justify-content: center;
   max-width: 68vw;
 }
 header section ul li {
   margin: 1em;
-}
-header section ul li:first-child {
   width: 100%;
 }
 header nav ul {
@@ -206,6 +210,7 @@ main section p i {
   padding: 0.1em 0.25em 0.15em;
   border-radius: 0.15em;
   margin: 0;
+  white-space: nowrap;
   font-size: 88%;
   font-style: normal;
   transition: background-color 0.2s;
@@ -213,7 +218,7 @@ main section p i {
 main section p i a {
   text-decoration: none;
   color: inherit;
-  opacity: 0.94;
+  opacity: 1;
 }
 main section ul {
   flex-wrap: nowrap;
@@ -351,7 +356,7 @@ button {
   border: none;
   background-color: #f6f4f4;
   padding: 1em 2em;
-  border-radius: 2em;
+  border-radius: 0.33em;
   font-size: calc(12px + 1vw);
   font-weight: normal;
   cursor: pointer;
@@ -359,15 +364,16 @@ button {
   opacity: 0.94;
   color: #3e445a;
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: all 0.2s;
 }
 
 button:hover {
   opacity: 1;
+  box-shadow: none;
 }
 
 a button {
-  margin: 0.5em;
+  margin: 0 1em 1em 0;
 }
 
 button.disabled {
@@ -388,7 +394,7 @@ button.third {
   background-color: rgba(110, 100, 255, 0.2);
 }
 
-.blue:hover {
+.blue:hover, .blue:focus {
   background-color: rgba(110, 100, 255, 0.3);
 }
 
@@ -396,23 +402,23 @@ button.third {
   background-color: rgba(44, 200, 161, 0.2);
 }
 
-.green:hover {
+.green:hover, .green:focus {
   background-color: rgba(44, 200, 161, 0.3);
 }
 
 .yellow {
-  background-color: rgba(236, 191, 43, 0.2);
+  background-color: rgba(240, 188, 20, 0.2);
 }
 
-.yellow:hover {
-  background-color: rgba(236, 191, 43, 0.3);
+.yellow:hover, .yellow:focus {
+  background-color: rgba(240, 188, 20, 0.3);
 }
 
 .red {
   background-color: rgba(249, 86, 186, 0.2);
 }
 
-.red:hover {
+.red:hover, .red:focus {
   background-color: rgba(249, 86, 186, 0.3);
 }
 
@@ -420,16 +426,64 @@ button.third {
   text-decoration-color: rgba(110, 100, 255, 0.4);
 }
 
+#first h2:hover, #first h2:focus {
+  text-decoration-color: rgba(110, 100, 255, 0.6);
+}
+
 #second h2 {
   text-decoration-color: rgba(44, 200, 161, 0.4);
+}
+
+#second h2:hover, #second h2:focus {
+  text-decoration-color: rgba(44, 200, 161, 0.6);
 }
 
 #third h2 {
   text-decoration-color: rgba(249, 86, 186, 0.4);
 }
 
+#third h2:hover, #third h2:focus {
+  text-decoration-color: rgba(249, 86, 186, 0.6);
+}
+
 #fourth h2 {
-  text-decoration-color: rgba(236, 191, 43, 0.4);
+  text-decoration-color: rgba(240, 188, 20, 0.4);
+}
+
+#fourth h2:hover, #fourth h2:focus {
+  text-decoration-color: rgba(240, 188, 20, 0.6);
+}
+
+.tooltip {
+  opacity: 0;
+  position: absolute;
+  top: -3em;
+  left: 0;
+  white-space: nowrap;
+  font-size: 46%;
+  font-weight: normal;
+  background-color: #66728a;
+  padding: 0 0.75em;
+  border-radius: 0.25em;
+  color: #fdfbfa;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.tooltip:before {
+  content: "";
+  position: absolute;
+  bottom: -0.25em;
+  left: 0.75em;
+  height: 0;
+  width: 0;
+  border-left: 0.25em solid transparent;
+  border-right: 0.25em solid transparent;
+  border-top: 0.25em solid #66728a;
+}
+
+h2:hover .tooltip {
+  opacity: 0.7;
 }
 
 .active {
@@ -475,6 +529,9 @@ button.third {
     padding: 1em;
   }
 
+  header {
+    text-align: left;
+  }
   header nav aside {
     position: fixed;
     right: 0;
@@ -511,7 +568,10 @@ button.third {
     height: 2em;
     width: auto;
   }
-  header nav .logo, header nav .menu {
+  header nav ul li {
+    margin: 1em;
+  }
+  header nav ul .logo, header nav ul .menu {
     display: initial;
     visibility: visible;
     pointer-events: all;
@@ -519,10 +579,10 @@ button.third {
 
   main section ul {
     flex-wrap: wrap;
-    text-align: center;
+    text-align: left;
   }
   main section ul li {
-    width: 70%;
+    width: 100%;
   }
   main section:nth-child(odd) ul li:first-child {
     margin-left: 1em;
@@ -533,7 +593,11 @@ button.third {
     margin-right: 1em;
     width: 100%;
   }
-  main section:last-child ul li button {
+  main section:last-child ul li:nth-child(n+0) {
+    text-align: left;
+    width: 100%;
+  }
+  main section:last-child ul li:nth-child(n+0) button {
     margin-top: 0;
   }
   main section:first-child:before, main section:nth-child(even):before, main section:nth-child(even):after {
