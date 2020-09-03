@@ -17,6 +17,15 @@ $large: 3em;
 
 $scale: 1;
 
+@keyframes fade {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 0.8;
+  }
+}
+
 ::selection{
   background-color: rgba($red, 0.33);
 }
@@ -50,9 +59,10 @@ body.lightbox:after {
   bottom: 0;
   left: 0;
   background-color: $black;
-  opacity: 0.8;
   z-index: 1;
-  display:none;
+  display: none;
+  opacity: 0.8;
+  animation: fade 0.2s;
   pointer-events: none;
 }
 ul, ol, dl {
@@ -103,8 +113,6 @@ section {
     position: relative;
     font-size: 2.2em;
     line-height: 1.25em;
-    text-decoration: underline;
-    transition: text-decoration-color 0.2s;
     cursor: pointer;
   }
 }
@@ -135,6 +143,7 @@ header {
         margin: 2em;
       }
       aside {
+        position: relative;
         .menu {
           display: none;
         }
@@ -262,10 +271,10 @@ main {
       background-color: $offwhite;
     }
     section:first-child:before, section:nth-child(even):before {
-      top: calc(1px + -#{$large});
+      top: calc(0.5rem + -#{$large});
     }
     section:nth-child(even):after{
-      bottom: calc(1px + -#{$large});
+      bottom: calc(0.5rem + -#{$large});
       transform: rotate(180deg);
     } 
     section:first-child:before {
@@ -352,36 +361,43 @@ footer {
 h1, h2, h3, h4, h5, h6, dt {
   font-weight: 900;
 }
-
 button {
+  font-size: calc(#{$base} + 1vw);
   border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+button:hover {
+  opacity: 1;
+}
+.button {
+  display: inline-block;
   background-color: $offwhite;
   padding: 1em 2em;
   border-radius: 0.33em;
-  font-size: calc(#{$base} + 1vw);
   font-weight: normal;
+  letter-spacing: 0;
   cursor: pointer;
   box-shadow: 0 0.2em 0.2em 0 rgba(0, 0, 0, 0), 0 0.2em 0.2em 0 rgba(0, 0, 0, 0.125);
   opacity: 0.94;
   color: $black;
+  white-space: nowrap;
   text-decoration: none;
   transition: all 0.2s;
 }
-button:hover {
+.button:hover {
   opacity: 1;
   box-shadow: none;
 }
-a button {
+.button {
   margin: 0 1em 1em 0;
 }
-button.disabled {
-  color: transparent;
-}
-button.second {
+.button.second {
   background-color: $black;
     color: $white;
 }
-button.third {
+.button.third {
   background-color: $blue;
   color: $white;
 }
@@ -410,31 +426,35 @@ button.third {
 .red:hover, .red:focus {
   background-color: rgba($red, 0.3);
 }
-#first h2 {
+.tooltip {
+  text-decoration: underline;
+  transition: text-decoration-color 0.2s;
+}
+#first .tooltip {
   text-decoration-color: rgba($blue, 0.4);
 }
-#first h2:hover, #first h2:focus {
+#first .tooltip:hover, #first .tooltip:focus {
   text-decoration-color: rgba($blue, 0.6);
 }
-#second h2 {
+#second .tooltip {
   text-decoration-color: rgba($green, 0.4);
 }
-#second h2:hover, #second h2:focus {
+#second .tooltip:hover, #second .tooltip:focus {
   text-decoration-color: rgba($green, 0.6);
 }
-#third h2 {
+#third .tooltip {
   text-decoration-color: rgba($red, 0.4);
 }
-#third h2:hover, #third h2:focus {
+#third .tooltip:hover, #third .tooltip:focus {
   text-decoration-color: rgba($red, 0.6);
 }
-#fourth h2 {
+#fourth .tooltip {
   text-decoration-color: rgba($yellow, 0.4);
 }
-#fourth h2:hover, #fourth h2:focus {
+#fourth .tooltip:hover, #fourth .tooltip:focus {
   text-decoration-color: rgba($yellow, 0.6);
 }
-.tooltip {
+.tooltip span {
   opacity: 0;
   position: absolute;
   top: -3em;
@@ -449,10 +469,10 @@ button.third {
   transition: opacity 0.2s;
   pointer-events: none;
 }
-.tooltip:before {
+.tooltip span:before {
   content: "";
   position: absolute;
-  bottom: -0.25em;
+  bottom: -0.225em;
   left: 0.75em;
   height: 0;
   width: 0;
@@ -460,11 +480,15 @@ button.third {
   border-right: 0.25em solid transparent;
   border-top: 0.25em solid $grey;
 }
-h2:hover .tooltip {
+.tooltip:hover span {
   opacity: 0.7;
 }
 .active {
-  display: initial !important;
+  display:initial !important;
+}
+.show {
+  right: 0 !important;
+  transition: right 0.35s;
 }
 @media only screen and (max-width: calc(#{$scale} * 1280px)) {
   main {
@@ -528,41 +552,44 @@ h2:hover .tooltip {
   header {
     text-align: left;
     nav {
-      aside {
-        position: fixed;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        padding: 2.8em;
-        background-color: $black;
-        color: $offwhite;
-        z-index: 2;
-        display: none;
-          ul {
-            flex-direction: column;
-            align-items: flex-start;
-            li {
-              margin:0;
-              padding: 0.5em 0;
-              font-size: 1.5em;
-              display: initial;
-            }
-            .menu {
-              margin:0 0 2em;
-              padding-left: 0;
-              display: none;
-              button {
-                background-color: transparent;
-                box-shadow: none;
-                padding: 0;
-                color: $offwhite;
-                img {
-                  height: 2em;
-                  width: auto;
+      ul {
+        aside {
+          position: fixed;
+          right: -100%;
+          top: 0;
+          bottom: 0;
+          padding: 2em 3em;
+          background-color: $black;
+          color: $offwhite;
+          z-index: 2;
+          transition: right 0.2s;
+            ul {
+              flex-direction: column;
+              align-items: flex-start;
+              li {
+                margin:0;
+                padding: 0.5em 0;
+                font-size: 1.5em;
+                display: initial;
+              }
+              .menu {
+                margin:0 0 1em;
+                padding-left: 0;
+                display: none;
+                button {
+                  background-color: transparent;
+                  box-shadow: none;
+                  padding: 0;
+                  color: $offwhite;
+                  img {
+                    height: 2em;
+                    width: auto;
+                  }
                 }
               }
             }
-          }
+  
+        }
       }
       ul {
         li {
@@ -578,6 +605,12 @@ h2:hover .tooltip {
   }
   main {
     section {
+      p {
+        i {
+          font-size: 96%;
+          letter-spacing: 0;
+        }
+      }
       ul {
         flex-wrap: wrap;
         text-align: left;
@@ -608,7 +641,7 @@ h2:hover .tooltip {
         li:nth-child(n+0) {
           text-align: left;
           width: 100%;
-          button {
+          .button {
             margin-top: 0;
           }
         }
@@ -618,10 +651,10 @@ h2:hover .tooltip {
       height: $med;
     }
     section:first-child:before, section:nth-child(even):before {
-      top: calc(1px + -#{$med});
+      top: calc(0.5rem + -#{$med});
     }
     section:nth-child(even):after{
-      bottom: calc(1px + -#{$med});
+      bottom: calc(0.5rem + -#{$med});
     } 
   }
   footer {
@@ -635,7 +668,7 @@ h2:hover .tooltip {
     }
   }
   body.lightbox:after  {
-    display: initial;
+    display: block;
   }
 }
 
