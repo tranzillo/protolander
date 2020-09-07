@@ -35,6 +35,14 @@
     opacity: 0.8;
   }
 }
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 ::selection {
   background-color: rgba(249, 86, 186, 0.33);
 }
@@ -61,6 +69,7 @@ html, body {
   font-size: calc(12px + 0.9vw);
   color: #3e445a;
   letter-spacing: 0.04em;
+  overflow-x: hidden;
 }
 
 body.lightbox:after {
@@ -99,7 +108,7 @@ a {
   transition: opacity 0.2s;
 }
 
-a:hover {
+a:hover, a:focus {
   opacity: 1;
 }
 
@@ -160,13 +169,13 @@ header nav ul li {
 header nav ul aside {
   position: relative;
 }
-header nav ul aside .menu {
+header nav ul aside .menu-button {
   display: none;
 }
-header nav .menu, header nav .logo {
+header nav .menu-button, header nav .logo {
   width: auto;
 }
-header nav .menu img, header nav .logo img {
+header nav .menu-button img, header nav .logo img {
   height: 100%;
   width: auto;
 }
@@ -176,19 +185,20 @@ header nav .logo {
   margin-right: auto;
   z-index: 2;
 }
-header nav .menu {
-  padding: 0.5em;
+header nav .menu-button {
+  padding: 0.5em 0;
   margin-left: auto;
   visibility: hidden;
   pointer-events: none;
+  order: 1;
 }
-header nav .menu button {
+header nav .menu-button button {
   background-color: transparent;
   box-shadow: none;
   padding: 0;
   color: #f6f4f4;
 }
-header nav .menu button img {
+header nav .menu-button button img {
   height: 2em;
   width: auto;
 }
@@ -229,6 +239,9 @@ main section p i a {
   text-decoration: none;
   color: inherit;
   opacity: 1;
+}
+main section p + a.button {
+  margin-top: 2em;
 }
 main section ul {
   flex-wrap: nowrap;
@@ -370,7 +383,7 @@ button {
   transition: opacity 0.2s;
 }
 
-button:hover {
+button:hover, button:focus {
   opacity: 1;
 }
 
@@ -385,7 +398,6 @@ button:hover {
   box-shadow: 0 0.2em 0.2em 0 rgba(0, 0, 0, 0), 0 0.2em 0.2em 0 rgba(0, 0, 0, 0.125);
   opacity: 0.94;
   color: #3e445a;
-  white-space: nowrap;
   text-decoration: none;
   transition: all 0.2s;
 }
@@ -506,12 +518,12 @@ button:hover {
   border-top: 0.25em solid #66728a;
 }
 
-.tooltip:hover span {
+.tooltip:hover span, .tooltip:focus span {
   opacity: 0.7;
 }
 
 .active {
-  display: initial !important;
+  visibility: visible !important;
 }
 
 .show {
@@ -563,10 +575,12 @@ button:hover {
   }
   header nav ul aside {
     position: fixed;
+    overflow-y: auto;
+    visibility: hidden;
     right: -100%;
     top: 0;
     bottom: 0;
-    padding: 2em 3em;
+    padding: 1.8em 3em;
     background-color: #3e445a;
     color: #f6f4f4;
     z-index: 2;
@@ -582,25 +596,26 @@ button:hover {
     font-size: 1.5em;
     display: initial;
   }
-  header nav ul aside ul .menu {
-    margin: 0 0 1em;
+  header nav ul aside ul .menu-button {
+    margin: 0 0 1.4em;
     padding-left: 0;
-    display: none;
+    display: initial;
+    order: initial;
   }
-  header nav ul aside ul .menu button {
+  header nav ul aside ul .menu-button button {
     background-color: transparent;
     box-shadow: none;
     padding: 0;
     color: #f6f4f4;
   }
-  header nav ul aside ul .menu button img {
+  header nav ul aside ul .menu-button button img {
     height: 2em;
     width: auto;
   }
   header nav ul li {
     margin: 1em;
   }
-  header nav ul .logo, header nav ul .menu {
+  header nav ul .logo, header nav ul .menu-button {
     display: initial;
     visibility: visible;
     pointer-events: all;

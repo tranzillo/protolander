@@ -19,32 +19,32 @@
       <ul>
         <li class="logo">
           <a href="https://tranzillo.com">
-            <img src="img/logo.svg">
+            <img alt="White Diamond Logo" src="img/logo.svg">
           </a>
         </li>
-        <aside>
-          <ul>
-            <li class="menu">
-              <button>
-                <img src="img/close.svg">
+        <li class="menu-button">
+          <button aria-controls="menu" aria-haspopup="true">
+            <img alt="Open Menu" src="img/menu.svg">
+          </button>
+        </li>
+        <aside role="menubar">
+          <ul role="menu" id="menu">
+            <li role="none" class="menu-button">
+              <button tabindex="-1" aria-controls="menu">
+                <img alt="Close Menu" src="img/close.svg">
               </button>
             </li>
-            <li>
-              <a href="lander.zip">Download</a>
+            <li role="none">
+              <a role="menuitem" href="lander.zip">Download</a>
             </li>
-            <li>
-              <a href="https://tranzillo.com">About</a>
+            <li role="none">
+              <a role="menuitem" href="https://tranzillo.com">About</a>
             </li>
-            <li>
-              <a href="https://www.upwork.com/freelancers/~01e06ecd3200e059f7">Support</a>
+            <li role="none">
+              <a role="menuitem" href="https://www.upwork.com/freelancers/~01e06ecd3200e059f7">Support</a>
             </li>
           </ul>
         </aside>
-        <li class="menu">
-          <button>
-            <img src="img/menu.svg">
-          </button>
-        </li>
       </ul>
     </nav>
   <section>
@@ -66,11 +66,11 @@
   <section id="first">
     <ul>
       <li>
-        <h2 class="tooltip">Tell your story<span>raise awareness</span></h2>
+        <h2 tabindex="0" class="tooltip">Tell your story<span role="tooltip">Raise awareness</span></h2>
         <p>Create a tightly focused user journey by <i class="blue"><a href="#first" target="_self">raising awareness</a></i>, <i class="green"><a href="#second" target="_self">piquing interest</a></i>, <i class="red"><a href="#third" target="_self">creating desire</a></i>, and <i class="yellow"><a href="#fourth" target="_self">promoting action</a></i>.</p>
       </li>
       <li>
-        <img src="img/laptop.svg">
+        <img src="img/laptop.svg" alt="Person sitting on the floor cross-legged and typing on a laptop atop their lap">
       </li>
     </ul>
   </section>
@@ -78,11 +78,11 @@
   <section id="second">
     <ul>
       <li>
-        <h2 class="tooltip">Find your look<span>pique interest</span></h2>
+        <h2 tabindex="0" class="tooltip">Find your look<span role="tooltip">Pique interest</span></h2>
         <p>Get creative with <a href="https://fonts.google.com/">fonts</a> and <a href="https://undraw.co/illustrations">illustrations</a> that are free for commercial use. Customization can be as easy as finding the right image and copying a&nbsp;link.</p>
       </li>
       <li>
-        <img src="img/components.svg">
+        <img src="img/components.svg" alt="Illustration of a component selection user interface">
       </li>
     </ul>
   </section>
@@ -90,11 +90,11 @@
   <section id="third">
     <ul>
       <li>
-        <h2 class="tooltip">Reach your audience<span>create desire</span></h2>
-        <p>Ensure every visitor shares the same experience regardless of browser, operating system, or device with a universally responsive&nbsp;layout.</p>
-      </li>
+        <h2 tabindex="0" class="tooltip">Reach your audience<span role="tooltip">Create desire</span></h2>
+        <p>Ensure every visitor shares the same experience regardless of browser or device thanks to a universally responsive&nbsp;layout.</p>
+        </li>
       <li>
-        <img src="img/stats.svg">
+        <img src="img/stats.svg" alt="Person exploring a webpage on a mobile device">
       </li>
     </ul>
   </section>
@@ -102,11 +102,11 @@
   <section id="fourth">
     <ul>
       <li>
-        <h2 class="tooltip">Make new friends<span>promote action</span></h2>
-        <p>Attract fans, clients, customers, and members with simple storytelling. A well-designed landing page can grow your reach without investing much time&nbsp;or&nbsp;money.</p>
+        <h2 tabindex="0" class="tooltip">Make new friends<span role="tooltip">Promote action</span></h2>
+        <p>Attract fans, clients, and customers using simple storytelling. A well-designed landing page can grow your reach without investing much time&nbsp;or&nbsp;money.</p>
       </li>
       <li>
-        <img src="img/cheers.svg">
+        <img src="img/cheers.svg" alt="Four people making a toast with drinks held up in the air">
       </li>
       <li>
         <a class="button third" href="lander.zip">Download this template</a>
@@ -229,20 +229,24 @@
 </footer>
 
 <script>
-$(".menu button").click(function () {
-    $("aside").addClass('show');
-    $("aside .menu").addClass('active');
+$(".menu-button button").click(function () {
+    $(this).attr("tabindex", -1);
+    $("aside").addClass('show active');
+    $("aside .menu-button").addClass('active');
+    $("aside .menu-button button").attr("tabindex", 0);
     $('body').addClass('lightbox');
-    $("aside .menu button").click(function () {
-      $("aside").removeClass('show');
-      $("aside .menu").removeClass('active');
+    $("aside .menu-button button").click(function () {
+      $(this).blur();
+      $(".menu-button button").attr("tabindex", 0);
+      $("aside").removeClass('show active');
+      $("aside .menu-button").removeClass('active');
+      $("aside .menu-button button").attr("tabindex", -1)
       $('body').removeClass('lightbox');
     });
 });
 $("i a").click(function(e) {
     e.preventDefault();
-    var x = $(this).attr("href");
-    $('html,body').animate({scrollTop: $(x).offset().top}, 200);
+    $('html,body').animate({scrollTop: $($(this).attr("href")).offset().top}, 200);
 });
 </script>
 </body>

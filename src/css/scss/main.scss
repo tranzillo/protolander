@@ -25,7 +25,14 @@ $scale: 1;
       opacity: 0.8;
   }
 }
-
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
 ::selection{
   background-color: rgba($red, 0.33);
 }
@@ -50,6 +57,7 @@ html, body {
   font-size: calc(#{$base} + 0.9vw);
   color: $black;
   letter-spacing: 0.04em;
+  overflow-x: hidden;
 }
 body.lightbox:after {
   content: "";
@@ -83,7 +91,7 @@ a {
   text-decoration: underline;
   transition: opacity 0.2s;
 }
-a:hover {
+a:hover, a:focus {
   opacity: 1;
 }
 
@@ -144,12 +152,12 @@ header {
       }
       aside {
         position: relative;
-        .menu {
+        .menu-button {
           display: none;
         }
       }
     }
-    .menu, .logo {
+    .menu-button, .logo {
       width: auto;
       img {
         height: 100%;
@@ -162,11 +170,12 @@ header {
       margin-right: auto;
       z-index: 2;
     }
-    .menu {
-      padding: 0.5em;
+    .menu-button {
+      padding: 0.5em 0;
       margin-left: auto;
       visibility: hidden;
       pointer-events: none;
+      order: 1;
       button {
         background-color: transparent;
         box-shadow: none;
@@ -184,7 +193,7 @@ header:before {
   content: "";
   display: block;
   position: absolute;
-  width:100%;
+  width: 100%;
   height: 100%;
   top: 0;
   left: 0;
@@ -217,6 +226,9 @@ main {
           opacity: 1;
         }
       }
+    }
+    p + a.button {
+      margin-top:2em;
     }
     ul {
       flex-wrap: nowrap;
@@ -368,7 +380,7 @@ button {
   opacity: 0.8;
   transition: opacity 0.2s;
 }
-button:hover {
+button:hover, button:focus {
   opacity: 1;
 }
 .button {
@@ -382,7 +394,6 @@ button:hover {
   box-shadow: 0 0.2em 0.2em 0 rgba(0, 0, 0, 0), 0 0.2em 0.2em 0 rgba(0, 0, 0, 0.125);
   opacity: 0.94;
   color: $black;
-  white-space: nowrap;
   text-decoration: none;
   transition: all 0.2s;
 }
@@ -480,11 +491,11 @@ button:hover {
   border-right: 0.25em solid transparent;
   border-top: 0.25em solid $grey;
 }
-.tooltip:hover span {
+.tooltip:hover span, .tooltip:focus span {
   opacity: 0.7;
 }
 .active {
-  display:initial !important;
+  visibility: visible !important;
 }
 .show {
   right: 0 !important;
@@ -555,47 +566,49 @@ button:hover {
       ul {
         aside {
           position: fixed;
+          overflow-y: auto;
+          visibility: hidden;
           right: -100%;
           top: 0;
           bottom: 0;
-          padding: 2em 3em;
+          padding: 1.8em 3em;
           background-color: $black;
           color: $offwhite;
           z-index: 2;
           transition: right 0.2s;
-            ul {
-              flex-direction: column;
-              align-items: flex-start;
-              li {
-                margin:0;
-                padding: 0.5em 0;
-                font-size: 1.5em;
-                display: initial;
-              }
-              .menu {
-                margin:0 0 1em;
-                padding-left: 0;
-                display: none;
-                button {
-                  background-color: transparent;
-                  box-shadow: none;
-                  padding: 0;
-                  color: $offwhite;
-                  img {
-                    height: 2em;
-                    width: auto;
-                  }
+          ul {
+            flex-direction: column;
+            align-items: flex-start;
+            li {
+              margin:0;
+              padding: 0.5em 0;
+              font-size: 1.5em;
+              display: initial;
+            }
+            .menu-button {
+              margin:0 0 1.4em;
+              padding-left: 0;
+              display: initial;
+              order: initial;
+              button {
+                background-color: transparent;
+                box-shadow: none;
+                padding: 0;
+                color: $offwhite;
+                img {
+                  height: 2em;
+                  width: auto;
                 }
               }
             }
-  
+          }
         }
       }
       ul {
         li {
           margin: 1em;
         }
-        .logo, .menu {
+        .logo, .menu-button {
           display: initial;
           visibility: visible;
           pointer-events: all;
